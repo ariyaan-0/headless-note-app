@@ -47,5 +47,3 @@ Create a new account to start taking notes.
 ![signup](/client/images/signup.png)
 
 ---
-
-You can upload screenshots of each page in the `images/

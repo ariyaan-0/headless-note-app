@@ -32,7 +32,7 @@ function App() {
 	}
 
 	return (
-		<div className="min-h-screen flex flex-wrap content-between bg-darkblue rounded-t-xl overflow-hidden">
+		<div className="min-h-screen flex flex-wrap content-between text-white bg-darkblue rounded-t-xl overflow-hidden">
 			<div className="w-full block">
 				<Header />
 				<main>

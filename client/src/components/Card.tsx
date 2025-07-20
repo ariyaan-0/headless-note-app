@@ -19,7 +19,9 @@ function Card({ $id, title, featuredImage, content }: CardProps) {
 	return (
 		<Link to={`/note/${$id}`}>
 			<div className="w-full bg-gray-100 rounded-xl p-4 min-h-[200px] flex flex-col">
-				<h2 className="text-xl font-bold mb-3">{title}</h2>
+				<h2 className="text-xl text-gray-700 font-bold mb-3">
+					{title}
+				</h2>
 				{featuredImage ? (
 					<img
 						src={appwriteService.getFilePreview(featuredImage)}

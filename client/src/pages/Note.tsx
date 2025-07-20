@@ -35,7 +35,7 @@ export default function Note() {
 	};
 
 	return note ? (
-		<div className="py-8">
+		<div className="py-8 text-white">
 			<Container>
 				<div className="w-full flex justify-center mb-4 relative border rounded-xl p-2">
 					{note.featuredImage && (

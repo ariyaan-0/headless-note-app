@@ -1,6 +1,7 @@
 import { Account, Client, ID } from "appwrite";
 import conf from "../conf/conf.ts";
 
+// Change this after the nodeJS backend server is ready
 export class AuthService {
 	client = new Client();
 	account: Account;

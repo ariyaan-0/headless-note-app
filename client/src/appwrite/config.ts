@@ -1,6 +1,7 @@
 import { Client, Databases, ID, Query, Storage } from "appwrite";
 import conf from "../conf/conf.ts";
 
+// Change this after the nodeJS backend server is ready
 export class Service {
 	client = new Client();
 	databases: Databases;

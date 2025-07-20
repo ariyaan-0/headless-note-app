@@ -1,0 +1,29 @@
+{
+	"editor.formatOnSave": true,
+	"editor.codeActionsOnSave": {
+		"source.fixAll.eslint": "explicit",
+		"source.fixAll.tslint": "explicit",
+		"source.organizeImports": "explicit"
+	},
+	"editor.tabCompletion": "onlySnippets",
+	"javascript.validate.enable": false,
+	"typescript.validate.enable": false,
+	"editor.tabSize": 4,
+	"editor.insertSpaces": false,
+
+	"[javascript]": {
+		"editor.insertSpaces": false,
+		"editor.tabSize": 4
+	},
+	"[typescript]": {
+		"editor.insertSpaces": false,
+		"editor.tabSize": 4
+	},
+	"[typescriptreact]": {
+		"editor.insertSpaces": false,
+		"editor.tabSize": 4
+	},
+
+	"prettier.useTabs": true,
+	"prettier.tabWidth": 4
+}

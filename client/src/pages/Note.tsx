@@ -2,7 +2,7 @@
 import parse from "html-react-parser";
 import { useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
-import appwriteService from "../appwrite/config";
+import service from "../services/config";
 import { Button, Container } from "../components";
 
 export default function Note() {
@@ -12,7 +12,7 @@ export default function Note() {
 
 	useEffect(() => {
 		if (slug) {
-			appwriteService.getNote(slug).then((note) => {
+			service.getNote(slug).then((note) => {
 				if (note) setNote(note);
 				else navigate("/");
 			});
@@ -24,10 +24,10 @@ export default function Note() {
 	const deleteNote = () => {
 		if (!note) return;
 
-		appwriteService.deleteNote(note.$id).then((status) => {
+		service.deleteNote(note._id).then((status) => {
 			if (status) {
 				if (note.featuredImage) {
-					appwriteService.deleteFile(note.featuredImage);
+					service.deleteFile(note.featuredImage);
 				}
 				navigate("/");
 			}
@@ -40,7 +40,7 @@ export default function Note() {
 				<div className="w-full flex justify-center mb-4 relative border rounded-xl p-2">
 					{note.featuredImage && (
 						<img
-							src={appwriteService.getFilePreview(
+							src={service.getFilePreview(
 								note.featuredImage
 							)}
 							alt={note.title}
@@ -49,7 +49,7 @@ export default function Note() {
 					)}
 
 					<div className="absolute right-6 top-6 flex space-x-3">
-						<Link to={`/edit-note/${note.$id}`}>
+						<Link to={`/edit-note/${note._id}`}>
 							<Button bgColor="bg-green-500">Edit</Button>
 						</Link>
 						<Button bgColor="bg-red-500" onClick={deleteNote}>

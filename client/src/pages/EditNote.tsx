@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import appwriteService from "../appwrite/config";
+import service from "../services/config";
 import { Container, NoteForm } from "../components";
 
 function EditNote() {
@@ -11,7 +11,7 @@ function EditNote() {
 
 	useEffect(() => {
 		if (slug) {
-			appwriteService.getNote(slug).then((note) => {
+			service.getNote(slug).then((note) => {
 				if (note) {
 					setNote(note);
 				} else {

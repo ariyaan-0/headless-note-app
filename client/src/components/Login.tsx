@@ -1,8 +1,8 @@
 import { useState } from "react";
-import { SubmitHandler, useForm } from "react-hook-form";
+import { type SubmitHandler, useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
-import authService from "../appwrite/auth";
+import service from "../services/auth";
 import { login as authLogin } from "../store/authSlice";
 import { Button, Input, Logo } from "./index";
 
@@ -26,9 +26,9 @@ function Login() {
 	const login: SubmitHandler<LoginFormInputs> = async (data) => {
 		setError("");
 		try {
-			const session = await authService.login(data);
+			const session = await service.login(data);
 			if (session) {
-				dispatch(authLogin(session));
+				dispatch(authLogin({ userData: session }));
 				navigate("/");
 			} else {
 				setError("Login failed. Please check your credentials.");

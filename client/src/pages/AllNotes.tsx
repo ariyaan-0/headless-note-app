@@ -1,37 +1,38 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import appwriteService from "../appwrite/config";
+import service from "../services/config";
 import { Card, Container } from "../components";
-import { RootState } from "../store";
+import type { RootState } from "../store/store";
 
 interface Note {
-	$id: string;
+	_id: string;
 	title: string;
-	content: string;
-	[key: string]: any; // for other dynamic fields
+	content?: string;
+	[key: string]: any; 
 }
 
 function AllNotes() {
 	const [notes, setNotes] = useState<Note[]>([]);
 	const userData = useSelector((state: RootState) => state.auth.userData);
-	console.log("UserID: ", userData?.$id);
+
 	useEffect(() => {
-		if (userData?.$id) {
-			appwriteService.getNotes(userData.$id).then((res) => {
-				if (res) {
-					setNotes(res.documents);
-				}
-			});
-		}
-	}, [userData]);
+        if (userData) {
+            service.getNotes().then((res) => {
+                if (res && Array.isArray(res)) {
+                    setNotes(res);
+                }
+            });
+        }
+    }, [userData]);
+
 
 	return (
 		<div className="w-full py-8">
 			<Container>
 				<div className="flex flex-wrap">
 					{notes.map((note) => (
-						<div key={note.$id} className="p-2 w-1/4">
+						<div key={note._id} className="p-2 w-1/4">
 							<Card {...note} />
 						</div>
 					))}

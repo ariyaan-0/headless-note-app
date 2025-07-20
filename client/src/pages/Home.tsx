@@ -1,32 +1,25 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import appwriteService from "../appwrite/config";
+import service from "../services/config";
+import type { Note } from "../services/config";
 import { Card, Container } from "../components";
-import { RootState } from "../store";
-
-// Define the structure of a note (customize as needed)
-interface Note {
-	slug: string;
-	title: string;
-	content: string;
-	featuredImage: string;
-	category: string;
-	$id: string;
-	[key: string]: any;
-}
+import type { RootState } from "../store/store";
 
 function Home() {
 	const [notes, setNotes] = useState<Note[]>([]);
 	const userData = useSelector((state: RootState) => state.auth.userData);
 
 	useEffect(() => {
-		appwriteService.getNotes(userData?.$id).then((notesRes) => {
-			if (notesRes && notesRes.documents) {
-				setNotes(notesRes.documents);
-			}
-		});
-	}, []);
+        if (userData?._id) {
+            service.getNotes().then((notesRes) => {
+                if (Array.isArray(notesRes)) {
+                    setNotes(notesRes.filter((note) => note.userId === userData._id));
+                }
+            });
+        }
+    }, [userData]);
+
 
 	if (notes.length === 0) {
 		return (
@@ -51,7 +44,7 @@ function Home() {
 			<Container>
 				<div className="flex flex-wrap">
 					{notes.map((note) => (
-						<div key={note.$id} className="p-2 w-1/4">
+						<div key={note._id} className="p-2 w-1/4">
 							<Card {...note} />
 						</div>
 					))}

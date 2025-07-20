@@ -1,15 +1,15 @@
 import parse from "html-react-parser";
 import { Link } from "react-router-dom";
-import appwriteService from "../appwrite/config";
+import service from "../services/config";
 
 interface CardProps {
-	$id: string;
+	_id: string;
 	title: string;
 	featuredImage?: string;
 	content?: string;
 }
 
-function Card({ $id, title, featuredImage, content }: CardProps) {
+function Card({ _id, title, featuredImage, content }: CardProps) {
 	// Take first 100 characters of content for preview (optional)
 	const contentPreview =
 		content && content.length > 100
@@ -17,14 +17,14 @@ function Card({ $id, title, featuredImage, content }: CardProps) {
 			: content;
 
 	return (
-		<Link to={`/note/${$id}`}>
+		<Link to={`/note/${_id}`}>
 			<div className="w-full bg-gray-100 rounded-xl p-4 min-h-[200px] flex flex-col">
 				<h2 className="text-xl text-gray-700 font-bold mb-3">
 					{title}
 				</h2>
 				{featuredImage ? (
 					<img
-						src={appwriteService.getFilePreview(featuredImage)}
+						src={service.getFilePreview(featuredImage)}
 						alt={title}
 						className="rounded-xl object-cover max-h-48 w-full"
 					/>

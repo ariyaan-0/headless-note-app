@@ -1,9 +1,9 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useState } from "react";
-import { SubmitHandler, useForm } from "react-hook-form";
+import { type SubmitHandler, useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
-import authService from "../appwrite/auth";
+import service from "../services/auth";
 import { login } from "../store/authSlice";
 import { Button, Input, Logo } from "./index";
 
@@ -28,11 +28,11 @@ function Signup() {
 	const create: SubmitHandler<SignupFormInputs> = async (data) => {
 		setError("");
 		try {
-			const userData = await authService.createAccount(data);
+			const userData = await service.createAccount(data);
 			if (userData) {
-				const currentUser = await authService.getCurrentUser();
+				const currentUser = await service.getCurrentUser();
 				if (currentUser) {
-					dispatch(login(currentUser));
+					dispatch(login({ userData: currentUser }));
 					navigate("/");
 				}
 			}

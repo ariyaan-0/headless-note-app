@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { Editor } from "@tinymce/tinymce-react";
-import { Control, Controller } from "react-hook-form";
+import { type Control, Controller } from "react-hook-form";
 
 interface RTEProps {
 	name?: string;
